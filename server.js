@@ -5,6 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const mongoose = require('mongoose');
+const crypto = require('crypto');
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
@@ -28,7 +29,10 @@ app.prepare().then(() => {
     res.append('Access-Control-Allow-Credentials', true);
     next();
   });
-  server.use(bodyParser.json());
+  server.use(bodyParser.json());        // to support JSON-encoded bodies
+  server.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+    extended: false
+  })); 
   
   const mongoURI = 'mongodb://bubble:dx13658444998@ds039311.mlab.com:39311/markdowns';
   const conn = mongoose.createConnection(mongoURI,{ useNewUrlParser: true });
@@ -46,10 +50,10 @@ app.prepare().then(() => {
           if (err) {
             return reject(err);
           }
-          const filename = buf.toString('hex') + path.extname(file.originalname);
+          const filename = file.originalname;
           const fileInfo = {
             filename: filename,
-            bucketName: 'uploads'
+            bucketName: 'uploads',
           };
           resolve(fileInfo);
         });
@@ -61,9 +65,26 @@ app.prepare().then(() => {
   
   server.post('/upload', upload.single('file'), (req, res, next) => { 
     console.log(`it's working`);
-    res.end();
+    res.redirect('/files');
 })
   
+  server.get('/files', (req, res) => {
+    gfs.files.find().toArray((err, files) => {
+      // Check if files
+      if (!files || files.length === 0) {
+        return res.status(404).json({
+          err: 'No files exist'
+        });
+      }
+  
+      // Files exist
+      return res.json(files);
+    });
+  });
+  server.post('/loaddata', (req, res)=>{
+    console.log(req.body)
+    res.end()
+  })
   
   server.get('*', (req, res) => handler(req, res));
 
