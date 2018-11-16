@@ -31,10 +31,6 @@ class post extends React.Component{
     return(
       <Layout>
         {/**<Markdown escapeHtml={false} >{post1}</Markdown>**/}
-        <form action="/upload" method="POST" encType="multipart/form-data">
-          <input type="file" name="file" id="file" />
-          <input type="submit" value="Submit" />
-        </form>
       </Layout>
     )
   }
