@@ -24,4 +24,4 @@ class example extends React.Component{
   }
 }
 
-//export default withStyles(headerStyle)(example)
+//export default withStyles(Style)(example)
