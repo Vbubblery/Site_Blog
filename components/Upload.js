@@ -11,13 +11,22 @@ class Upload extends React.Component{
     super(props);
     this.classes = props.classes;
   }
+  postdata(data){
+    var xml = new XMLHttpRequest;
+    xml.open("post","/loaddata",true)
+    xml.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xml.send(JSON.stringify({data}))
+    // todo apply the redux and get the
+    // response from the server and then refresh the
+    // state
+  }
+
   handleChange(file){
     var reader = new FileReader();
-    reader.onloadend = function(){
-      console.log(reader.result);
-    };
+    reader.onloadend = ()=> this.postdata(reader.result);
     reader.readAsText(file);
   }
+
   componentDidMount(){
     //todo after all component loaded.
   }

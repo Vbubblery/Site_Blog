@@ -21,7 +21,7 @@ const PORT = process.env.PORT || 3001;
 
 app.prepare().then(() => {
   const server = express();
-  
+
   server.use((req, res, next) => {
     res.append('Access-Control-Allow-Origin' , 'http://localhost:3001');
     res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -32,8 +32,8 @@ app.prepare().then(() => {
   server.use(bodyParser.json());        // to support JSON-encoded bodies
   server.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: false
-  })); 
-  
+  }));
+
   const mongoURI = 'mongodb://bubble:dx13658444998@ds039311.mlab.com:39311/markdowns';
   const conn = mongoose.createConnection(mongoURI,{ useNewUrlParser: true });
   let gfs;
@@ -61,31 +61,31 @@ app.prepare().then(() => {
     }
   });
   const upload = multer({ storage });
-  
-  
-  server.post('/upload', upload.single('file'), (req, res, next) => { 
-    console.log(`it's working`);
-    res.redirect('/files');
-})
-  
-  server.get('/files', (req, res) => {
-    gfs.files.find().toArray((err, files) => {
-      // Check if files
-      if (!files || files.length === 0) {
-        return res.status(404).json({
-          err: 'No files exist'
-        });
-      }
-  
-      // Files exist
-      return res.json(files);
-    });
-  });
+
+
+//   server.post('/upload', upload.single('file'), (req, res, next) => {
+//     console.log(`it's working`);
+//     res.redirect('/files');
+// })
+//
+//   server.get('/files', (req, res) => {
+//     gfs.files.find().toArray((err, files) => {
+//       // Check if files
+//       if (!files || files.length === 0) {
+//         return res.status(404).json({
+//           err: 'No files exist'
+//         });
+//       }
+//
+//       // Files exist
+//       return res.json(files);
+//     });
+//   });
   server.post('/loaddata', (req, res)=>{
     console.log(req.body)
     res.end()
   })
-  
+
   server.get('*', (req, res) => handler(req, res));
 
   server.use(handler).listen(PORT, (err) => {
