@@ -82,7 +82,7 @@ app.prepare().then(() => {
 //     });
 //   });
   server.post('/loaddata', (req, res)=>{
-    console.log(req.body)
+    console.log(req.body.data)
     res.end()
   })
 
