@@ -18,6 +18,14 @@ class post extends React.Component{
     super(props);
     this.classes = props.classes;
   }
+
+  handleChange(file){
+    var reader = new FileReader();
+    reader.onloadend = function(){
+      console.log(reader.result);
+    };
+    reader.readAsText(file);
+  }
   componentDidMount(){
     let data = {};
 		data.title = "title";
@@ -31,6 +39,7 @@ class post extends React.Component{
     return(
       <Layout>
         {/**<Markdown escapeHtml={false} >{post1}</Markdown>**/}
+        <input type="file" onChange={ (e) => this.handleChange(e.target.files[0]) } />
       </Layout>
     )
   }
