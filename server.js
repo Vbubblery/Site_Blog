@@ -81,7 +81,7 @@ app.prepare().then(() => {
 //       return res.json(files);
 //     });
 //   });
-  server.post('/loaddata', (req, res)=>{
+  server.post('/loadmd', (req, res)=>{
     console.log(req.body.data)
     res.end()
   })

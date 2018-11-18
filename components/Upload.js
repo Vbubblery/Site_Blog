@@ -13,7 +13,7 @@ class Upload extends React.Component{
   }
   postdata(data){
     var xml = new XMLHttpRequest;
-    xml.open("post","/loaddata",true)
+    xml.open("post","/loadmd",true)
     xml.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xml.send(JSON.stringify({data}))
     // todo apply the redux and get the
