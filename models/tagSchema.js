@@ -7,5 +7,5 @@ var tagSchema = new mongoose.Schema({
     name: {type: String, required: true, unique:true}
 });
 
-tagSchema.plugin(AutoIncrement, {id:'tag_counter',inc_field: 'id'});
+tagSchema.plugin(AutoIncrement, {id:'tag_id',inc_field: 'id'});
 module.exports = mongoose.model('Tag',tagSchema);
