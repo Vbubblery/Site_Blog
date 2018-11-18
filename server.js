@@ -4,12 +4,15 @@ const next = require('next');
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const mongoose = require('mongoose');
-const crypto = require('crypto');
-const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
-const Grid = require('gridfs-stream');
+// const mongoose = require('mongoose');
+// const crypto = require('crypto');
+// const multer = require('multer');
+// const GridFsStorage = require('multer-gridfs-storage');
+// const Grid = require('gridfs-stream');
 
+// DB driver
+import mongoose from 'mongoose';
+import dbConfig from './utils/dbConnections/dbConfig';
 
 
 const routes = require('./routers');
@@ -21,7 +24,7 @@ const PORT = process.env.PORT || 3001;
 
 app.prepare().then(() => {
   const server = express();
-
+  // Allows for cross origin domain request:
   server.use((req, res, next) => {
     res.append('Access-Control-Allow-Origin' , 'http://localhost:3001');
     res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -29,38 +32,43 @@ app.prepare().then(() => {
     res.append('Access-Control-Allow-Credentials', true);
     next();
   });
+  // Parse application/json
   server.use(bodyParser.json());        // to support JSON-encoded bodies
+  // Parse application/x-www-form-urlencoded
   server.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: false
   }));
-
-  const mongoURI = 'mongodb://bubble:dx13658444998@ds039311.mlab.com:39311/markdowns';
-  const conn = mongoose.createConnection(mongoURI,{ useNewUrlParser: true });
-  let gfs;
-  conn.once('open', () => {
-    // Init stream
-    gfs = Grid(conn.db, mongoose.mongo);
-    gfs.collection('uploads');
-  });
-  const storage = new GridFsStorage({
-    url: mongoURI,
-    file: (req, file) => {
-      return new Promise((resolve, reject) => {
-        crypto.randomBytes(16, (err, buf) => {
-          if (err) {
-            return reject(err);
-          }
-          const filename = file.originalname;
-          const fileInfo = {
-            filename: filename,
-            bucketName: 'uploads',
-          };
-          resolve(fileInfo);
-        });
-      });
-    }
-  });
-  const upload = multer({ storage });
+  mongoose.Promise = Promise;
+  mongoose.connect(dbConfig.database,{useMongoClient: true, autoReconnect: true, poolSize: 10,useMongoClient: true, keepAlive: true, keepAliveInitialDelay: 300000});
+  const db = mongoose.connection;
+	db.on('error', console.error.bind(console, 'connection error:'));
+  // const mongoURI = 'mongodb://bubble:dx13658444998@ds039311.mlab.com:39311/markdowns';
+  // const conn = mongoose.createConnection(mongoURI,{ useNewUrlParser: true });
+  // let gfs;
+  // conn.once('open', () => {
+  //   // Init stream
+  //   gfs = Grid(conn.db, mongoose.mongo);s
+  //   gfs.collection('uploads');
+  // });
+  // const storage = new GridFsStorage({
+  //   url: mongoURI,
+  //   file: (req, file) => {
+  //     return new Promise((resolve, reject) => {
+  //       crypto.randomBytes(16, (err, buf) => {
+  //         if (err) {
+  //           return reject(err);
+  //         }
+  //         const filename = file.originalname;
+  //         const fileInfo = {
+  //           filename: filename,
+  //           bucketName: 'uploads',
+  //         };
+  //         resolve(fileInfo);
+  //       });
+  //     });
+  //   }
+  // });
+  // const upload = multer({ storage });
 
 
 //   server.post('/upload', upload.single('file'), (req, res, next) => {
