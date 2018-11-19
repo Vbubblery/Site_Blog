@@ -11,7 +11,7 @@ const mdSchema = new mongoose.Schema({
     tags: { type: [String], index: true },
     date: { type: Date, default: Date.now },
   }
-});
+},{collection:'markdown'});
 
 mdSchema.index({ date: 1, type: -1 });
 module.exports = mongoose.model('markdown',mdSchema);

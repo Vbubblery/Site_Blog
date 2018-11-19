@@ -11,15 +11,19 @@ const bodyParser = require('body-parser');
 // const Grid = require('gridfs-stream');
 
 // DB driver
-import mongoose from 'mongoose';
-import dbConfig from './utils/dbConnections/dbConfig';
+const mongoose = require('mongoose');
+mongoose.set('useFindAndModify', false);
+const dbConfig = require('./utils/dbConnections/dbConfig');
+
+// MongoDB Models
+const Markdown = require('./models/markdownSchema');
 
 
-const routes = require('./routers');
+const clientRoutes = require('./routers/clientRoutes');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
-const handler = routes.getRequestHandler(app);
+const handler = clientRoutes.getRequestHandler(app);
 const PORT = process.env.PORT || 3001;
 
 app.prepare().then(() => {
@@ -39,7 +43,8 @@ app.prepare().then(() => {
     extended: false
   }));
   mongoose.Promise = Promise;
-  mongoose.connect(dbConfig.database,{useMongoClient: true, autoReconnect: true, poolSize: 10,useMongoClient: true, keepAlive: true, keepAliveInitialDelay: 300000});
+
+  mongoose.connect(dbConfig.database,{useNewUrlParser: true, autoReconnect: true, poolSize: 10, keepAlive: true, keepAliveInitialDelay: 300000, family: 4});
   const db = mongoose.connection;
 	db.on('error', console.error.bind(console, 'connection error:'));
   // const mongoURI = 'mongodb://bubble:dx13658444998@ds039311.mlab.com:39311/markdowns';
@@ -89,13 +94,26 @@ app.prepare().then(() => {
 //       return res.json(files);
 //     });
 //   });
-  server.post('/loadmd', (req, res)=>{
-    console.log(req.body.data)
-    res.end()
-  })
 
+/** API parts  **/
+  server.route('/api/loadmd')
+    .post(async(req,res,next)=>{
+      var markdown = new Markdown({
+        title:'post1',
+        author:'admin',
+        body:req.body.data,
+        category:'tech',
+        subCategory:'c#',
+      });
+      await markdown.save(err=>{
+        if(err) {return res.status(404).send({msg:'SomeThing goes wrong.'});}
+      });
+      res.status(200).send(markdown);
+    });
+
+
+/** Handle the another require by Next.js **/
   server.get('*', (req, res) => handler(req, res));
-
   server.use(handler).listen(PORT, (err) => {
     if (err) throw err;
     console.log(`> Ready on http://localhost:${PORT}`)
