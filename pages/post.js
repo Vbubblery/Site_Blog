@@ -36,7 +36,7 @@ class post extends React.Component{
 //   });
     if (this.props.router.query.id == null){
       this.setState((state, props) => ({
-        md:"Error props for post path."
+        md:"Error props!"
       }));
       return;
     }
