@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import Style from '../styles/uploadStyle'
 
 import { withStyles } from '@material-ui/core/styles';
@@ -11,14 +12,20 @@ class Upload extends React.Component{
     super(props);
     this.classes = props.classes;
   }
-  postdata(data){
-    var xml = new XMLHttpRequest;
-    xml.open("post","/api/loadmd",true)
-    xml.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xml.send(JSON.stringify({data}))
-    // todo apply the redux and get the
-    // response from the server and then refresh the
-    // state
+  async postdata(data){
+    // traditional ajax method
+    // var xml = new XMLHttpRequest;
+    // xml.open("post","/api/loadmd",true)
+    // xml.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    // xml.send(JSON.stringify({data}))
+    const options = {
+      method: 'POST',
+      headers: { 'content-type': 'application/json;charset=UTF-8' },
+      data: JSON.stringify({data}),
+      url:`/api/loadmd`,
+    };
+    const res = await axios(options);
+    console.log(res);
   }
 
   handleChange(file){

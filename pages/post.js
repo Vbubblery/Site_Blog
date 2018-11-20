@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import {withRouter} from 'next/router'
 import React from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import Layout from '../components/MyLayout';
 import Markdown from '../components/Markdown';
@@ -20,18 +21,23 @@ class post extends React.Component{
     this.state = {md: "# Loadding"};
   }
 
-  componentDidMount(){
-    self = this;
-    var xml = new XMLHttpRequest;
-    xml.addEventListener("readystatechange", function(ev) {
-      if (xml.status == 200 && xml.readyState == 4) {
-        self.setState((state, props) => ({
-          md:JSON.parse(xml.responseText).body
-        }));
-      }
-    });
-    xml.open("get",`/api/loadmd?id=${this.props.router.query.id}`,true);
-    xml.send();
+  async componentDidMount(){
+// axios.get('/user?ID=12345')
+//   .then(function (response) {
+//     // handle success
+//     console.log(response);
+//   })
+//   .catch(function (error) {
+//     // handle error
+//     console.log(error);
+//   })
+//   .then(function () {
+//     // always executed
+//   });
+    const res = await axios.get(`/api/loadmd?id=${this.props.router.query.id}`);
+    this.setState((state, props) => ({
+      md:res.data.body
+    }));
   }
 
   render(){
