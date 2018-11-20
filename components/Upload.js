@@ -15,13 +15,13 @@ class Upload extends React.Component{
   async postdata(data){
     // traditional ajax method
     // var xml = new XMLHttpRequest;
-    // xml.open("post","/api/loadmd",true)
+    // xml.open("post","/api/loadmd",true);
     // xml.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    // xml.send(JSON.stringify({data}))
+    // xml.send(JSON.stringify(data));
     const options = {
       method: 'POST',
       headers: { 'content-type': 'application/json;charset=UTF-8' },
-      data: JSON.stringify({data}),
+      data: JSON.stringify(data),
       url:`/api/loadmd`,
     };
     const res = await axios(options);
@@ -29,8 +29,13 @@ class Upload extends React.Component{
   }
 
   handleChange(file){
+    var data = {};
+    data.name=file.name;
     var reader = new FileReader();
-    reader.onloadend = ()=> this.postdata(reader.result);
+    reader.onloadend = ()=> {
+      data.data = reader.result;
+      this.postdata(data);
+    };
     reader.readAsText(file);
   }
 

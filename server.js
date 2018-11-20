@@ -99,7 +99,7 @@ app.prepare().then(() => {
   server.route('/api/loadmd')
     .post(async(req,res,next)=>{
       var markdown = new Markdown({
-        title:'post1',
+        title:req.body.name,
         author:'admin',
         body:req.body.data,
         category:'tech',
