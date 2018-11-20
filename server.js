@@ -111,7 +111,8 @@ app.prepare().then(() => {
       res.status(200).send(markdown);
     })
     .get((req,res,next)=>{
-      Markdown.findOne({},(err,item)=>{
+      console.log(req.query);
+      Markdown.findById(req.query.id,(err,item)=>{
         if(err || item == null) {return res.status(404).send({msg:'SomeThing goes wrong.'});}
         res.status(200).send(item);
       });

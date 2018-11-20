@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import {withRouter} from 'next/router'
 import React from 'react';
 import PropTypes from 'prop-types';
 import Layout from '../components/MyLayout';
@@ -16,19 +17,31 @@ class post extends React.Component{
   constructor(props){
     super(props);
     this.classes = props.classes;
+    this.state = {md: "# Loadding"};
   }
 
   componentDidMount(){
-    //todo
+    self = this;
+    var xml = new XMLHttpRequest;
+    xml.addEventListener("readystatechange", function(ev) {
+      if (xml.status == 200 && xml.readyState == 4) {
+        self.setState((state, props) => ({
+          md:JSON.parse(xml.responseText).body
+        }));
+      }
+    });
+    xml.open("get",`/api/loadmd?id=${this.props.router.query.id}`,true);
+    xml.send();
   }
+
   render(){
     return(
       <Layout>
-        <Markdown escapeHtml={false} >{post1}</Markdown>
+        <Markdown escapeHtml={false} >{`${this.state.md}`}</Markdown>
       </Layout>
     )
   }
 }
 
 
-export default post
+export default withRouter(post)
