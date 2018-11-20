@@ -18,7 +18,7 @@ class post extends React.Component{
   constructor(props){
     super(props);
     this.classes = props.classes;
-    this.state = {md: "# Loadding"};
+    this.state = {md: "# Loading"};
   }
 
   async componentDidMount(){
@@ -34,6 +34,12 @@ class post extends React.Component{
 //   .then(function () {
 //     // always executed
 //   });
+    if (this.props.router.query.id == null){
+      this.setState((state, props) => ({
+        md:"Error props for post path."
+      }));
+      return;
+    }
     const res = await axios.get(`/api/loadmd?id=${this.props.router.query.id}`);
     this.setState((state, props) => ({
       md:res.data.body
