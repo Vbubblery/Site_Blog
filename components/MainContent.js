@@ -17,7 +17,7 @@ class MainContent extends React.Component{
     this.state = {mds:[]}
   }
   async componentDidMount(){
-    const res = await axios.get(`/api/allmd`);
+    const res = await axios.get(`/api/allmd5`);
     this.setState((state, props) => ({
       mds:res.data
     }));
@@ -26,9 +26,9 @@ class MainContent extends React.Component{
   render(){
     var posts = this.state.mds && this.state.mds.map(post=>{
       return(
-        <Link href={`/post?id=${post._id}`}>
+        <Link href={`/post?id=${post._id}`} key={post._id}>
           <ListItem component="a" button key={post._id}>
-            <ListItemText primary={post.title} />
+            <ListItemText primary={post.title} secondary={post.meta.date} key={post._id} />
           </ListItem>
         </Link>
       )

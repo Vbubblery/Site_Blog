@@ -116,14 +116,20 @@ app.prepare().then(() => {
         res.status(200).send(item);
       });
     });
-  server.route('/api/allmd')
+  server.route('/api/allmd5')
     .get((req,res,next)=>{
       Markdown.find({},'meta _id title',(err,item)=>{
         if(err || item == null) {return res.status(404).send({msg:'SomeThing goes wrong.'});}
-
         res.status(200).send(item);
-      }).limit(10);
+      }).sort({date:-1}).limit(5);//get the latest 5 posts from
     })
+    server.route('/api/allmd')
+      .get((req,res,next)=>{
+        Markdown.find({},'meta _id title',(err,item)=>{
+          if(err || item == null) {return res.status(404).send({msg:'SomeThing goes wrong.'});}
+          res.status(200).send(item);
+        });
+      })
 
 /** Handle the another require by Next.js **/
   server.get('*', (req, res) => handler(req, res));
