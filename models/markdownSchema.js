@@ -7,9 +7,9 @@ const mdSchema = new mongoose.Schema({
   category:{type:String,required: true},
   subCategory:{type:String,required: true},
   comments:[{body:String,date:Date}],
+  date: { type: Date, default: Date.now },
   meta:{
     tags: { type: [String], index: true },
-    date: { type: Date, default: Date.now },
   }
 },{collection:'markdown'});
 
