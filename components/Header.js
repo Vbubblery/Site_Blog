@@ -36,11 +36,13 @@ class Header extends React.Component{
             <IconButton>
               <SearchIcon />
             </IconButton>
-            <Button variant="outlined" size="small">
-              Sign up
-            </Button>
+            <Link href="/admin/upload_md">
+              <Button variant="outlined" size="small">
+                Upload
+              </Button>
+            </Link>
           </Toolbar>
-          
+
           <Toolbar variant="dense" className={this.classes.toolbarSecondary}>
             {sections.map(section => (
               <Typography color="inherit" noWrap key={section}>
