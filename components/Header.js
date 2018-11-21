@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import {Toolbar,Button,Typography,IconButton,AppBar} from '@material-ui/core/';
 import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
+import MenuIcon from '@material-ui/icons/Menu';
 
 class Header extends React.Component{
   constructor(props){
@@ -30,6 +31,9 @@ class Header extends React.Component{
       <React.Fragment>
         <AppBar position="sticky" color="default">
           <Toolbar className={this.classes.toolbarMain}>
+            <IconButton color="inherit" aria-label="Open drawer">
+              <MenuIcon />
+            </IconButton>
             <Link href="/"><IconButton><HomeIcon /></IconButton></Link>
             <Typography component="h2" variant="h5" color="inherit" align="center" noWrap className={this.classes.toolbarTitle}>
               Juncheng's Blog

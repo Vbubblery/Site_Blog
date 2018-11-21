@@ -12,7 +12,7 @@ class BigIntro extends React.Component{
     super(props);
     this.classes = props.classes;
   }
-  
+
   render(){
     return(
       <React.Fragment>
@@ -21,10 +21,13 @@ class BigIntro extends React.Component{
             <Grid item md={8}>
               <div className={this.classes.mainFeaturedPostContent}>
                 <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-                    Welcome to my Blog, It will record everything here!
+                    Welcome to my Blog
                 </Typography>
-                <Typography variant="h5" color="inherit" paragraph>
-                    The latest post will appear here soon ...
+                <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+                    I will record everything here!
+                </Typography>
+                <Typography align="right" variant="h5" color="inherit" paragraph>
+                  -- Juncheng ZHOU
                 </Typography>
               </div>
             </Grid>
