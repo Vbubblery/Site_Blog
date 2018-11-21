@@ -122,7 +122,7 @@ app.prepare().then(() => {
         if(err || item == null) {return res.status(404).send({msg:'SomeThing goes wrong.'});}
 
         res.status(200).send(item);
-      });
+      }).limit(10);
     })
 
 /** Handle the another require by Next.js **/
