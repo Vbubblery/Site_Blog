@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import headerStyle from '../styles/headerStyle'
 
 import { withStyles } from '@material-ui/core/styles';
-import {Toolbar,Button,Typography,IconButton} from '@material-ui/core/';
+import {Toolbar,Button,Typography,IconButton,AppBar} from '@material-ui/core/';
 import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
 
@@ -28,7 +28,8 @@ class Header extends React.Component{
     ];
     return (
       <React.Fragment>
-          <Toolbar className={this.classes.toolbarMain}>
+      <AppBar position="sticky" color="default">
+          <Toolbar>
             <Link href="/"><IconButton><HomeIcon /></IconButton></Link>
             <Typography component="h2" variant="h5" color="inherit" align="center" noWrap className={this.classes.toolbarTitle}>
               Juncheng's Blog
@@ -42,7 +43,7 @@ class Header extends React.Component{
               </Button>
             </Link>
           </Toolbar>
-
+        </AppBar>
           <Toolbar variant="dense" className={this.classes.toolbarSecondary}>
             {sections.map(section => (
               <Typography color="inherit" noWrap key={section}>

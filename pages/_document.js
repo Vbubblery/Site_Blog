@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Document, { Head, Main, NextScript } from 'next/document';
 import flush from 'styled-jsx/server';
 import 'typeface-roboto';
+import favicon from '../utils/images/favicon.ico'
 
 class MyDocument extends Document {
   render() {
@@ -21,6 +22,7 @@ class MyDocument extends Document {
           {/* PWA primary color */}
           <meta name="theme-color" content={pageContext.theme.palette.primary.main} />
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+          <link rel="icon" type="image/x-icon" href={favicon} />
         </Head>
         <body>
           <Main />
@@ -57,7 +59,7 @@ MyDocument.getInitialProps = ctx => {
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: pageContext.sheetsRegistry.toString() }}
         />
-                
+
         {flush() || null}
       </React.Fragment>
     ),

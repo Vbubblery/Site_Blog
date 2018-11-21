@@ -5,8 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 const Layout = (props) => (
   <React.Fragment>
+    <Header />
     <div className={props.classes.layout}>
-      <Header />
       {props.children}
     </div>
     <Footer copyright={'Bubble'} />

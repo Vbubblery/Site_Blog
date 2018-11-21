@@ -26,7 +26,7 @@ class MainContent extends React.Component{
   render(){
     var posts = this.state.mds && this.state.mds.map(post=>{
       return(
-        <Typography variant="h6" key={post._id}>
+        <Typography variant="subtitle1" key={post._id} gutterBottom>
           <Link href={`/post?id=${post._id}`}><a>{post.title}</a></Link>
         </Typography>
       )
