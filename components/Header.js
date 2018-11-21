@@ -28,8 +28,8 @@ class Header extends React.Component{
     ];
     return (
       <React.Fragment>
-      <AppBar position="sticky" color="default">
-          <Toolbar>
+        <AppBar position="sticky" color="default">
+          <Toolbar className={this.classes.toolbarMain}>
             <Link href="/"><IconButton><HomeIcon /></IconButton></Link>
             <Typography component="h2" variant="h5" color="inherit" align="center" noWrap className={this.classes.toolbarTitle}>
               Juncheng's Blog
