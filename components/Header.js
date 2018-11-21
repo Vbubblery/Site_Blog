@@ -9,24 +9,33 @@ import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 
+const options = [
+  'Technology',
+  'Design',
+  'Culture',
+  'Business',
+  'Politics',
+  'Opinion',
+  'Science',
+  'Health',
+  'Travel',
+  'About',
+];
+const ITEM_HEIGHT = 48;
+
 class Header extends React.Component{
   constructor(props){
     super(props);
     this.classes = props.classes;
+    this.state = {anchorEl:null,};
   }
+  handleClick = event =>{
+    this.setState({ anchorEl: event.currentTarget });
+  }
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
   render(){
-    const sections = [
-      'Technology',
-      'Design',
-      'Culture',
-      'Business',
-      'Politics',
-      'Opinion',
-      'Science',
-      'Health',
-      'Travel',
-      'About',
-    ];
     return (
       <React.Fragment>
         <AppBar position="sticky" color="default">
