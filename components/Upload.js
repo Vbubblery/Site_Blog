@@ -30,7 +30,7 @@ class Upload extends React.Component{
 
   handleChange(file){
     var data = {};
-    data.name=file.name;
+    data.name=file.name.slice(0, -3);
     var reader = new FileReader();
     reader.onloadend = ()=> {
       data.data = reader.result;
