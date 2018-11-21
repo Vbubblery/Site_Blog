@@ -5,6 +5,9 @@ const styles = theme => ({
   mainGrid: {
     marginTop: theme.spacing.unit * 3,
   },
+  listRoot:{
+    width: '100%',
+  },
 })
 
 export default styles;

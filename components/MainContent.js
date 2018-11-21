@@ -8,7 +8,7 @@ import mainContentStyle from '../styles/mainContentStyle';
 import MainSideBar from './MainSideBar'
 
 import { withStyles } from '@material-ui/core/styles';
-import {Grid,Typography,Divider,paper} from '@material-ui/core/';
+import {Grid,Typography,Divider,List,ListItem,ListItemText} from '@material-ui/core/';
 
 class MainContent extends React.Component{
   constructor(props){
@@ -26,9 +26,11 @@ class MainContent extends React.Component{
   render(){
     var posts = this.state.mds && this.state.mds.map(post=>{
       return(
-        <Typography variant="subtitle1" key={post._id} gutterBottom>
-          <Link href={`/post?id=${post._id}`}><a>{post.title}</a></Link>
-        </Typography>
+        <Link href={`/post?id=${post._id}`}>
+          <ListItem component="a" button key={post._id}>
+            <ListItemText primary={post.title} />
+          </ListItem>
+        </Link>
       )
     });
 
@@ -40,7 +42,11 @@ class MainContent extends React.Component{
                 Latest Blog Posts
             </Typography>
             <Divider />
-            {posts}
+            <div className={this.classes.listRoot}>
+              <List>
+                {posts}
+              </List>
+            </div>
           </Grid>
           <MainSideBar />
         </Grid>
