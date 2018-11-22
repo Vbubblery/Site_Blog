@@ -20,7 +20,7 @@ class MyDocument extends Document {
           {/* PWA primary color */}
           <meta name="theme-color" content={pageContext.theme.palette.primary.main} />
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-          <link rel='stylesheet' type='text/css' href='https://unpkg.com/nprogress@0.2.0/nprogress.css' />
+          <link rel='stylesheet' type='text/css' href='/css/nprogress.css' />
           <link rel="icon" type="image/x-icon" href={favicon} />
         </Head>
         <body>
