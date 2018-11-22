@@ -2,9 +2,9 @@ import Link from 'next/link';
 import React from 'react';
 import PropTypes from 'prop-types';
 import headerStyle from '../styles/headerStyle'
-
+import Router from 'next/router'
 import { withStyles } from '@material-ui/core/styles';
-import {Toolbar,Button,Typography,IconButton,AppBar} from '@material-ui/core/';
+import {Toolbar,Button,Typography,IconButton,AppBar,Menu,MenuItem} from '@material-ui/core/';
 import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -13,12 +13,6 @@ const options = [
   'Technology',
   'Design',
   'Culture',
-  'Business',
-  'Politics',
-  'Opinion',
-  'Science',
-  'Health',
-  'Travel',
   'About',
 ];
 const ITEM_HEIGHT = 48;
@@ -35,14 +29,31 @@ class Header extends React.Component{
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
+  redirect = () =>{
+    Router.push('/about');
+  }
   render(){
+    const { anchorEl } = this.state;
+    const open = Boolean(anchorEl);
     return (
       <React.Fragment>
         <AppBar position="sticky" color="default">
           <Toolbar className={this.classes.toolbarMain}>
-            <IconButton color="inherit" aria-label="Open drawer">
+            <IconButton color="inherit" aria-label="More" aria-owns={open ? 'long-menu' : undefined} aria-haspopus="true" onClick={this.handleClick}>
               <MenuIcon />
             </IconButton>
+            <Menu
+              id="long-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={this.handleClose}
+              PaperProps={{style:{maxHeight: ITEM_HEIGHT * 4.5,width: 200,}}}>
+              {options.map(option=>(
+                <MenuItem key={option} selected={option === 'Pyxis'} onClick={this.redirect}>
+                  {option}
+                </MenuItem>
+              ))}
+            </Menu>
             <Link href="/"><IconButton><HomeIcon /></IconButton></Link>
             <Typography component="h2" variant="h5" color="inherit" align="center" noWrap className={this.classes.toolbarTitle}>
               Juncheng's Blog
@@ -57,13 +68,15 @@ class Header extends React.Component{
             </Link>
           </Toolbar>
         </AppBar>
+        {/**
           <Toolbar variant="dense" className={this.classes.toolbarSecondary}>
-            {sections.map(section => (
+            {options.map(section => (
               <Typography color="inherit" noWrap key={section}>
                 {section}
               </Typography>
             ))}
           </Toolbar>
+          **/}
       </React.Fragment>
     )
   }
