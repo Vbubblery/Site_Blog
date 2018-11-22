@@ -8,8 +8,8 @@ const styles = theme => ({
   toolbarSecondary: {
     justifyContent: 'space-between',
   },
-  appbarMargin:{
-    margin:5,
+  appbarZindex:{
+    'z-index': 1030,
   },
 });
 
