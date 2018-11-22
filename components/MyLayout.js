@@ -1,6 +1,6 @@
-import Header from './Header'
-import Footer from './Footer'
-import mainStyle from '../styles/mainStyle'
+import Header from './Header';
+import Footer from './Footer';
+import mainStyle from '../styles/mainStyle';
 import { withStyles } from '@material-ui/core/styles';
 
 const Layout = (props) => (
