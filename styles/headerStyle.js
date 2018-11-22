@@ -8,6 +8,9 @@ const styles = theme => ({
   toolbarSecondary: {
     justifyContent: 'space-between',
   },
+  appbarMargin:{
+    margin:5,
+  },
 });
 
 export default styles;

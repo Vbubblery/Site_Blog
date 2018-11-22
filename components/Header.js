@@ -37,7 +37,7 @@ class Header extends React.Component{
     const open = Boolean(anchorEl);
     return (
       <React.Fragment>
-        <AppBar position="sticky" color="default">
+        <AppBar position="sticky" className={this.classes.appbarMargin} color="default">
           <Toolbar className={this.classes.toolbarMain}>
             <IconButton color="inherit" aria-label="More" aria-owns={open ? 'long-menu' : undefined} aria-haspopup="true" onClick={this.handleClick}>
               <MenuIcon />
