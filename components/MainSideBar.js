@@ -8,8 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import {Grid,Typography,Divider,Paper} from '@material-ui/core/';
 
 const archives = [
-  'December 2018',
-  'November 2018',
+  'Coming Soon...',
 ];
 
 const social = [
@@ -25,7 +24,7 @@ class MainContent extends React.Component{
     super(props);
     this.classes = props.classes;
   }
-  
+
   render(){
     return(
       <React.Fragment>
@@ -45,7 +44,7 @@ class MainContent extends React.Component{
         </Grid>
     </React.Fragment>
     )
-    
+
   }
 }
 export default withStyles(mainContentStyle)(MainContent)
