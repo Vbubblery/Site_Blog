@@ -10,12 +10,12 @@ import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 
 const options = [
-  'Technology',
-  'Design',
-  'Culture',
-  'About',
+  {name:'Tech',link:'/'},
+  {name:'news',link:'/'},
+  {name:'CS',link:'/'},
+  {name:'About',link:'/about'},
 ];
-const ITEM_HEIGHT = 48;
+const ITEM_HEIGHT = 50;
 
 class Header extends React.Component{
   constructor(props){
@@ -29,8 +29,8 @@ class Header extends React.Component{
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
-  redirect = () =>{
-    Router.push('/about');
+  redirect = (link)=>{
+    Router.push(link);
   }
   render(){
     const { anchorEl } = this.state;
@@ -39,7 +39,7 @@ class Header extends React.Component{
       <React.Fragment>
         <AppBar position="sticky" color="default">
           <Toolbar className={this.classes.toolbarMain}>
-            <IconButton color="inherit" aria-label="More" aria-owns={open ? 'long-menu' : undefined} aria-haspopus="true" onClick={this.handleClick}>
+            <IconButton color="inherit" aria-label="More" aria-owns={open ? 'long-menu' : undefined} aria-haspopup="true" onClick={this.handleClick}>
               <MenuIcon />
             </IconButton>
             <Menu
@@ -47,10 +47,10 @@ class Header extends React.Component{
               anchorEl={anchorEl}
               open={open}
               onClose={this.handleClose}
-              PaperProps={{style:{maxHeight: ITEM_HEIGHT * 4.5,width: 200,}}}>
+              PaperProps={{style:{maxHeight: ITEM_HEIGHT * 4,width: 200,}}}>
               {options.map(option=>(
-                <MenuItem key={option} selected={option === 'Pyxis'} onClick={this.redirect}>
-                  {option}
+                <MenuItem key={option.name} onClick={()=>this.redirect(option.link)}>
+                  {option.name}
                 </MenuItem>
               ))}
             </Menu>
