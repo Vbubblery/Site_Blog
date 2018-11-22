@@ -28,6 +28,7 @@ const PORT = process.env.PORT || 3001;
 
 app.prepare().then(() => {
   const server = express();
+  server.use(express.static('public'))
   // Allows for cross origin domain request:
   server.use((req, res, next) => {
     res.append('Access-Control-Allow-Origin' , 'http://localhost:3001');
