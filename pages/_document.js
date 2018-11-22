@@ -3,15 +3,13 @@ import PropTypes from 'prop-types';
 import Document, { Head, Main, NextScript } from 'next/document';
 import flush from 'styled-jsx/server';
 import 'typeface-roboto';
-import favicon from '../utils/images/favicon.ico'
-
+import favicon from '../utils/images/favicon.ico';
 class MyDocument extends Document {
   render() {
     const { pageContext } = this.props;
 
     return (
       <html lang={this.props.__NEXT_DATA__.props.lang || 'en'} dir="ltr">
-
         <Head>
           <meta charSet="utf-8" />
           {/* Use minimum-scale=1 to enable GPU rasterization */}
@@ -22,6 +20,7 @@ class MyDocument extends Document {
           {/* PWA primary color */}
           <meta name="theme-color" content={pageContext.theme.palette.primary.main} />
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+          <link rel='stylesheet' type='text/css' href='https://unpkg.com/nprogress@0.2.0/nprogress.css' />
           <link rel="icon" type="image/x-icon" href={favicon} />
         </Head>
         <body>
