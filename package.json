@@ -38,6 +38,7 @@
     "next-images": "^1.0.1",
     "next-routes": "^1.4.2",
     "node-sass": "^4.9.2",
+    "nprogress": "^0.2.0",
     "raw-loader": "^0.5.1",
     "react": "^16.4.1",
     "react-bootstrap-table": "^4.3.1",
