@@ -17,7 +17,7 @@ const parseHtml = htmlParser({
   processingInstructions: [/* ... */]
 })
 
-class post extends React.Component{
+class Post extends React.Component{
   constructor(props){
     super(props);
     this.classes = props.classes;
@@ -63,4 +63,4 @@ class post extends React.Component{
 }
 
 
-export default withStyles(postStyle)(withRouter(post))
+export default withStyles(postStyle)(withRouter(Post))

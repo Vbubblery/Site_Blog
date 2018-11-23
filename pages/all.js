@@ -1,9 +1,28 @@
-import Layout from '../components/MyLayout.js'
+import Link from 'next/link';
+import {withRouter} from 'next/router'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const all =() => (
-  <Layout>
-    <p>All Posts</p>
-  </Layout>
-)
+import { withStyles } from '@material-ui/core/styles';
+import {Typography} from '@material-ui/core/';
 
-export default all
+class All extends React.Component{
+  constructor(props){
+    super(props);
+    this.classes = props.classes;
+  }
+
+  componentDidMount(){
+    //todo after all component loaded.
+  }
+
+  render(){
+    return(
+      <React.Fragment>
+        //todo
+      </React.Fragment>
+    )
+  }
+}
+export default All;
+//export default withStyles(Style)(example)
