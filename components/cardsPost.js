@@ -3,10 +3,12 @@ import {withRouter} from 'next/router'
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import dynamic from 'next/dynamic'
+import { withStyles } from '@material-ui/core/styles';
+import {Typography} from '@material-ui/core/';
 
+import cardsPostStyleStyle from '../styles/cardsPostStyle'
 
-class All extends React.Component{
+class CardsPost extends React.Component{
   constructor(props){
     super(props);
     this.classes = props.classes;
@@ -24,5 +26,4 @@ class All extends React.Component{
     )
   }
 }
-export default All;
-//export default withStyles(Style)(example)
+export default withStyles(cardsPostStyleStyle)(CardsPost)
