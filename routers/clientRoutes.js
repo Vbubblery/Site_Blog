@@ -6,4 +6,5 @@ routes.add('index', '/');
 routes.add('about');
 //routes.add('tac', '/works/tac');
 routes.add('post');
+routes.add('all');
 routes.add({name: 'upload_md', pattern: '/admin/upload_md', page: '/admin/upload_md'});

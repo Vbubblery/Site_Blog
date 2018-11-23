@@ -13,7 +13,7 @@ const options = [
   {name:'Tech',link:'/'},
   {name:'news',link:'/'},
   {name:'CS',link:'/'},
-  {name:'All',link:'/'},
+  {name:'All',link:'/all'},
   {name:'About',link:'/about'},
 ];
 const ITEM_HEIGHT = 50;
