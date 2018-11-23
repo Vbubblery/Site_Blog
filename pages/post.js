@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import {withRouter} from 'next/router'
+import {withRouter} from 'next/router';
 import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
@@ -7,6 +7,9 @@ import Layout from '../components/MyLayout';
 import Markdown from '../components/Markdown';
 const htmlParser = require('react-markdown/plugins/html-parser')
 import post1 from '../utils/blog-post.1.md';
+import {Card,CardContent} from "@material-ui/core";
+import postStyle from '../styles/postStyle'
+import { withStyles } from '@material-ui/core/styles';
 //const post1 = "# This is a header\n\nAnd this is a paragraph\n\n<code>const htmlParser = require('react-markdown/plugins/html-parser')</code>";
 
 const parseHtml = htmlParser({
@@ -49,11 +52,15 @@ class post extends React.Component{
   render(){
     return(
       <Layout>
-        <Markdown escapeHtml={false} >{`${this.state.md}`}</Markdown>
+        <Card className={this.classes.card}>
+          <CardContent>
+            <Markdown escapeHtml={false} >{`${this.state.md}`}</Markdown>
+          </CardContent>
+        </Card>
       </Layout>
     )
   }
 }
 
 
-export default withRouter(post)
+export default withStyles(postStyle)(withRouter(post))

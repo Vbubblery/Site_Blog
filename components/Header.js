@@ -13,6 +13,7 @@ const options = [
   {name:'Tech',link:'/'},
   {name:'news',link:'/'},
   {name:'CS',link:'/'},
+  {name:'All',link:'/'},
   {name:'About',link:'/about'},
 ];
 const ITEM_HEIGHT = 50;
@@ -47,7 +48,7 @@ class Header extends React.Component{
               anchorEl={anchorEl}
               open={open}
               onClose={this.handleClose}
-              PaperProps={{style:{maxHeight: ITEM_HEIGHT * 4,width: 200,}}}>
+              PaperProps={{style:{maxHeight: ITEM_HEIGHT * options.length,width: 200,}}}>
               {options.map(option=>(
                 <MenuItem key={option.name} onClick={()=>this.redirect(option.link)}>
                   {option.name}

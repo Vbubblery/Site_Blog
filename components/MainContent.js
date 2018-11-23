@@ -27,8 +27,8 @@ class MainContent extends React.Component{
     var posts = this.state.mds && this.state.mds.map(post=>{
       return(
         <Link href={`/post?id=${post._id}`} key={post._id}>
-          <ListItem component="a" button key={post._id}>
-            <ListItemText primary={post.title} secondary={post.meta.date} key={post._id} />
+          <ListItem component="a" divider={`True`} button key={post._id}>
+            <ListItemText primary={post.title} secondary={post.date} key={post._id} />
           </ListItem>
         </Link>
       )

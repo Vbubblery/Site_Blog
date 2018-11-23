@@ -119,14 +119,14 @@ app.prepare().then(() => {
     });
   server.route('/api/allmd5')
     .get((req,res,next)=>{
-      Markdown.find({},'meta _id title',(err,item)=>{
+      Markdown.find({},'meta _id title date',(err,item)=>{
         if(err || item == null) {return res.status(404).send({msg:'SomeThing goes wrong.'});}
         res.status(200).send(item);
       }).sort({date:-1}).limit(5);//get the latest 5 posts from
     })
     server.route('/api/allmd')
       .get((req,res,next)=>{
-        Markdown.find({},'meta _id title',(err,item)=>{
+        Markdown.find({},'meta _id title date',(err,item)=>{
           if(err || item == null) {return res.status(404).send({msg:'SomeThing goes wrong.'});}
           res.status(200).send(item);
         });
