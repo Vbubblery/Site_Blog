@@ -22,8 +22,12 @@ class Post extends React.Component{
     super(props);
     this.classes = props.classes;
     this.state = {md: "# Loading"};
-  }
 
+
+  }
+  async getData(){
+
+  }
   async componentDidMount(){
 // axios.get('/user?ID=12345')
 //   .then(function (response) {

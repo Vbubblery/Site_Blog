@@ -8,6 +8,8 @@ import {Typography} from '@material-ui/core/';
 
 import cardsPostStyleStyle from '../styles/cardsPostStyle'
 
+const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
 class CardsPost extends React.Component{
   constructor(props){
     super(props);
@@ -21,7 +23,10 @@ class CardsPost extends React.Component{
   render(){
     return(
       <React.Fragment>
-        //todo
+        <div className={classNames(classes.layout, classes.cardGrid)}>
+          <Grid item key={card} sm={6} md={4} lg={3}>
+          </Grid>
+        </div>
       </React.Fragment>
     )
   }
