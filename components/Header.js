@@ -56,7 +56,7 @@ class Header extends React.Component{
               ))}
             </Menu>
             <Link href="/"><IconButton><HomeIcon /></IconButton></Link>
-            <Typography component="h2" variant="h5" color="inherit" align="center" noWrap className={this.classes.toolbarTitle}>
+            <Typography component="p" variant="h5" color="inherit" align="center" noWrap className={this.classes.toolbarTitle}>
               Juncheng's Blog
             </Typography>
             <IconButton>

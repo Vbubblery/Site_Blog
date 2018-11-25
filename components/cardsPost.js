@@ -5,28 +5,36 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import {Typography,Grid,Card,CardMedia,CardContent,CardActions,Button} from '@material-ui/core/';
-
-import cardsPostStyleStyle from '../styles/cardsPostStyle'
+import axios from 'axios';
+import cardsPostStyleStyle from '../styles/cardsPostStyle';
 import classNames from 'classnames';
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 class CardsPost extends React.Component{
   constructor(props){
     super(props);
     this.classes = props.classes;
+    this.state = {mds:[]}
   }
 
-  componentDidMount(){
-    //todo after all component loaded.
+  async componentDidMount(){
+    const res = await axios.get(`/api/allmd`);
+    this.setState((state, props) => ({
+      mds:res.data
+    }));
   }
 
   render(){
+    const cards = this.state.mds && this.state.mds.map((md)=>(
+      <Card className={this.classes.card}>
+        
+      </Card>
+    ));
     return(
       <React.Fragment>
         <div className={classNames(this.classes.layout, this.classes.cardGrid)}>
           <Grid container spacing={40}>
-            {cards.map(card => (
-              <Grid item key={card} sm={6} md={4} lg={3}>
+            {this.state.mds && this.state.mds.map(card => (
+              <Grid item key={card._id} sm={12} md={6} lg={4}>
                 <Card className={this.classes.card}>
                   <CardMedia
                     className={this.classes.cardMedia}
@@ -34,18 +42,14 @@ class CardsPost extends React.Component{
                     title="Image title"
                   />
                   <CardContent className={this.classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">Heading</Typography>
+                    <Typography gutterBottom variant="h5" component="h2">{card.title}</Typography>
                     <Typography>
                      This is a media card. You can use this section to describe the content.
                     </Typography>
                   </CardContent>
-                  <CardActions>
-                  <Button size="small" color="primary">
-                    Share
-                  </Button>
-                  <Button size="small" color="primary">
-                    View
-                  </Button>
+                  <CardActions disableActionSpacing>
+                    <Button size="small" color="primary">Share</Button>
+                    <Link href="/"><Button size="small" color="primary">View</Button></Link>
                   </CardActions>
                 </Card>
               </Grid>
