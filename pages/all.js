@@ -3,6 +3,8 @@ import {withRouter} from 'next/router'
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import CardsPost from '../components/cardsPost'
+import Layout from '../components/MyLayout.js'
 import dynamic from 'next/dynamic'
 
 
@@ -19,7 +21,9 @@ class All extends React.Component{
   render(){
     return(
       <React.Fragment>
-        //todo
+        <Layout>
+          <CardsPost />
+        </Layout>
       </React.Fragment>
     )
   }
