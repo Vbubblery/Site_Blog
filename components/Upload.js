@@ -25,7 +25,7 @@ class Upload extends React.Component{
       url:`/api/loadmd`,
     };
     const res = await axios(options);
-    alert("End");
+    alert("Done");
   }
 
   handleChange(file){
