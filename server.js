@@ -45,7 +45,7 @@ app.prepare().then(() => {
   }));
   mongoose.Promise = Promise;
 
-  mongoose.connect(dbConfig.database,{useNewUrlParser: true, autoReconnect: true, poolSize: 10,useCreateIndex:true, keepAlive: true, keepAliveInitialDelay: 30000, family: 4});
+  mongoose.connect(dbConfig.database,{useNewUrlParser: true,autoReconnect: true, poolSize: 10,useCreateIndex:true, keepAlive: true,reconnectTries: Number.MAX_VALUE,keepAliveInitialDelay: 30000, family: 4});
   const db = mongoose.connection;
 	db.on('error', console.error.bind(console, 'connection error:'));
   // const mongoURI = 'mongodb://bubble:dx13658444998@ds039311.mlab.com:39311/markdowns';
