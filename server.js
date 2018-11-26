@@ -10,6 +10,10 @@ const bodyParser = require('body-parser');
 // const GridFsStorage = require('multer-gridfs-storage');
 // const Grid = require('gridfs-stream');
 
+// Retrieve image data
+const upload = require('multer')({ dest: 'public/img' })
+
+
 // DB driver
 const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
@@ -97,6 +101,8 @@ app.prepare().then(() => {
 //   });
 
 /** API parts  **/
+  server.route('/api/loadimg')
+    .post();
   server.route('/api/loadmd')
     .post(async(req,res,next)=>{
       var markdown = new Markdown({
