@@ -11,6 +11,7 @@ class Upload extends React.Component{
   constructor(props){
     super(props);
     this.classes = props.classes;
+    this.state = {image:''};
   }
   async postdata(data){
     // traditional ajax method
@@ -48,7 +49,10 @@ class Upload extends React.Component{
       url:'/api/uploadimg',
     };
     const res = await axios(options);
-    console.log(res);
+    console.log(res.data);
+    this.setState((state, props) => ({
+      image:res.data,
+    }));
   }
   componentDidMount(){
     //todo after all component loaded.
@@ -62,6 +66,9 @@ class Upload extends React.Component{
           <Button variant="contained" component="span" className={this.classes.button}>
             Upload
           </Button>
+          <Link href={`/api/images/${this.state.image.id}`}>
+            <Typography variant="h6">{`${JSON.stringify(this.state.image)}`}</Typography>
+          </Link>
         </label>
         <Divider />
         <input accept=".md" className={this.classes.input} id="contained-button-md" type="file" onChange={ (e) => this.handleChange(e.target.files[0]) }/>
