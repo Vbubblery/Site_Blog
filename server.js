@@ -2,8 +2,10 @@ const { createServer } = require('http');
 const { parse } = require('url');
 const next = require('next');
 const express = require('express');
+const fs = require('fs');
+const path = require('path');
 const bodyParser = require('body-parser');
-
+const cors = require('cors');
 // const mongoose = require('mongoose');
 // const crypto = require('crypto');
 // const multer = require('multer');
@@ -11,8 +13,15 @@ const bodyParser = require('body-parser');
 // const Grid = require('gridfs-stream');
 
 // Retrieve image data
-const upload = require('multer')({ dest: 'public/img' })
-
+const UPLOAD_PATH = 'utils/upload_img';
+const upload = require('multer')({ dest: UPLOAD_PATH });
+const Loki = require('lokijs');
+const { imageFilter, loadCollection,cleanFolder } = require('./utils/lokijsConfig');
+// Setup
+const LOKI_NAME = 'db.json';
+const COLLECTION_NAME = 'upload_images';
+const loki = new Loki(`${UPLOAD_PATH}/${LOKI_NAME}`, { persistenceMethod: 'fs' });
+cleanFolder(UPLOAD_PATH)
 
 // DB driver
 const mongoose = require('mongoose');
@@ -34,13 +43,14 @@ app.prepare().then(() => {
   const server = express();
   server.use(express.static('public'))
   // Allows for cross origin domain request:
-  server.use((req, res, next) => {
-    res.append('Access-Control-Allow-Origin' , 'http://localhost:3001');
-    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.append("Access-Control-Allow-Headers", "Origin, Accept,Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-    res.append('Access-Control-Allow-Credentials', true);
-    next();
-  });
+  // server.use((req, res, next) => {
+  //   res.append('Access-Control-Allow-Origin' , 'http://localhost:3001');
+  //   res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  //   res.append("Access-Control-Allow-Headers", "Origin, Accept,Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+  //   res.append('Access-Control-Allow-Credentials', true);
+  //   next();
+  // });
+  server.use(cors());
   // Parse application/json
   server.use(bodyParser.json());        // to support JSON-encoded bodies
   // Parse application/x-www-form-urlencoded
@@ -101,8 +111,43 @@ app.prepare().then(() => {
 //   });
 
 /** API parts  **/
-  server.route('/api/loadimg')
-    .post();
+  server.post('/api/uploadimg',upload.single('avatar'),async(req,res,next)=>{
+    try{
+      const col = await loadCollection(COLLECTION_NAME, loki);
+      const data = col.insert(req.file);
+      loki.saveDatabase();
+      res.send({ id: data.$loki, fileName: data.filename, originalName: data.originalname });
+    }catch(err){
+      console.error(err);
+      res.sendStatus(400);
+    }
+  });
+  server.get('/api/images', async (req, res) => {
+    try {
+        const col = await loadCollection(COLLECTION_NAME, loki);
+        res.send(col.data);
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(400);
+    }
+  });
+  server.get('/api/images/:id', async (req, res) => {
+    try {
+        const col = await loadCollection(COLLECTION_NAME, loki);
+        const result = col.get(req.params.id);
+
+        if (!result) {
+            res.sendStatus(404);
+            return;
+        };
+        res.setHeader('Content-Type', result.mimetype);
+        fs.createReadStream(path.join(UPLOAD_PATH, result.filename)).pipe(res);
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(400);
+    }
+  });
+
   server.route('/api/loadmd')
     .post(async(req,res,next)=>{
       var markdown = new Markdown({
