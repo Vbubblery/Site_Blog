@@ -5,7 +5,7 @@ import axios from 'axios';
 import Style from '../styles/uploadStyle'
 
 import { withStyles } from '@material-ui/core/styles';
-import {Typography,Button} from '@material-ui/core/';
+import {Typography,Button,Divider} from '@material-ui/core/';
 
 class Upload extends React.Component{
   constructor(props){
@@ -38,7 +38,18 @@ class Upload extends React.Component{
     };
     reader.readAsText(file);
   }
-
+  async handleImageChange(image){
+    const form = new FormData();
+    form.append('avatar', image);
+    const options = {
+      method: 'POST',
+      header:{'content-type': `multipart/form-data; boundary=${form._boundary}`},
+      data:form,
+      url:'/api/uploadimg',
+    };
+    const res = await axios(options);
+    console.log(res);
+  }
   componentDidMount(){
     //todo after all component loaded.
   }
@@ -46,12 +57,19 @@ class Upload extends React.Component{
   render(){
     return(
       <React.Fragment>
-        <input accept="*" className={this.classes.input} id="contained-button-file" type="file" onChange={ (e) => this.handleChange(e.target.files[0]) }/>
-        <label htmlFor="contained-button-file">
+        <input accept="image/*" className={this.classes.input} id="contained-button-image" type="file" onChange={ (e) => this.handleImageChange(e.target.files[0]) }/>
+        <label htmlFor="contained-button-image">
           <Button variant="contained" component="span" className={this.classes.button}>
             Upload
           </Button>
-      </label>
+        </label>
+        <Divider />
+        <input accept=".md" className={this.classes.input} id="contained-button-md" type="file" onChange={ (e) => this.handleChange(e.target.files[0]) }/>
+        <label htmlFor="contained-button-md">
+          <Button variant="contained" component="span" className={this.classes.button}>
+            Upload
+          </Button>
+        </label>
       </React.Fragment>
     )
   }
