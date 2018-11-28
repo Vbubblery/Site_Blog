@@ -5,5 +5,16 @@ const styles = theme => ({
   input: {
     display: 'none',
   },
+  textContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+  },
+  dense: {
+    marginTop: 16,
+  },
 });
 export default styles;

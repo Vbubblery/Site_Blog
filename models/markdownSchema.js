@@ -6,10 +6,12 @@ const mdSchema = new mongoose.Schema({
   body:{type:String,required: true},
   category:{type:String,required: true},
   subCategory:{type:String,required: true},
+  bref:{type:String,required: true},
   comments:[{body:String,date:Date}],
   date: { type: Date, default: Date.now },
   meta:{
     tags: { type: [String], index: true },
+    img:  {type:String,required: true},
   }
 },{collection:'markdown'});
 
