@@ -16,5 +16,8 @@ const styles = theme => ({
   dense: {
     marginTop: 16,
   },
+  menu: {
+    width: 200,
+  },
 });
 export default styles;
