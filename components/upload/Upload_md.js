@@ -122,14 +122,14 @@ class Upload_md extends React.Component{
             select
             value={this.state.author}
             onChange={this.handleChange('author')}
-            className={classNames(this.classes.textField)}
+            className={this.classes.textField}
             SelectProps={{
               MenuProps:{
                 className: this.classes.menu,
               }
             }}
             fullWidth
-            margin="dense"
+            margin="normal"
             variant="outlined">
             {authors.map(author => (
             <MenuItem key={author.value} value={author.value}>
