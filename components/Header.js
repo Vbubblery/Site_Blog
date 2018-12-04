@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import React from 'react';
 import PropTypes from 'prop-types';
-import headerStyle from '../styles/headerStyle'
-import Router from 'next/router'
+import headerStyle from '../styles/headerStyle';
+import Router from 'next/router';
 import { withStyles } from '@material-ui/core/styles';
 import {Toolbar,Button,Typography,IconButton,AppBar,Menu,MenuItem} from '@material-ui/core/';
 import SearchIcon from '@material-ui/icons/Search';

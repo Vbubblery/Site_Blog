@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import {withRouter} from 'next/router'
+import {withRouter} from 'next/router';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import CardsPost from '../components/cardsPost'
-import Layout from '../components/MyLayout.js'
-import dynamic from 'next/dynamic'
+import CardsPost from '../components/CardsPost';
+import Layout from '../components/MyLayout';
+import dynamic from 'next/dynamic';
 
 
 class All extends React.Component{
