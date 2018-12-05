@@ -10,7 +10,7 @@ const styles = theme => ({
   },
   button:{
     position: 'sticky',
-    top: 150,
+    top: 124,
     'z-index': 1029,
   },
   rightIcon: {

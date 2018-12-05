@@ -5,7 +5,7 @@ import {Button} from '@material-ui/core/';
 const About =() => (
   <Layout>
     <p>This is the about page</p>
-    <Link href="/"><Button>button</Button></Link>
+    <Link href="/about/cv"><Button>curriculum vitae</Button></Link>
   </Layout>
 )
 
