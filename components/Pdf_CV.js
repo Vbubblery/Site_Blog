@@ -40,6 +40,7 @@ class Pdf_CV extends React.Component{
                 file={`https://vbubblery.github.io/assets/pdf/resume.pdf`}
                 onLoadSuccess={this.onDocumentLoadSuccess}
                 renderMode={`canvas`}
+                error={`please whitelist this site in your ad blocker.`}
             >
 
             {
