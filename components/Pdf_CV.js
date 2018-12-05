@@ -2,17 +2,13 @@ import Link from 'next/link';
 import {withRouter} from 'next/router'
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+
 import { Document, Page, pdfjs } from 'react-pdf';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import {Typography} from '@material-ui/core/';
 
 import Pdf_CVStyle from '../styles/Pdf_CVStyle';
-
-const options = {
-  cMapUrl: 'cmaps/',
-  cMapPacked: true,
-};
 
 class Pdf_CV extends React.Component{
   state = {
@@ -33,18 +29,24 @@ class Pdf_CV extends React.Component{
     const { numPages } = this.state;
     return(
       <React.Fragment>
+      <div className={this.classes.document}>
         <Document
-            file={`http://127.0.0.1:3001/cv/resume.pdf`}
+            file={`https://vbubblery.github.io/assets/pdf/resume.pdf`}
             onLoadSuccess={this.onDocumentLoadSuccess}
-            options={options}
+            renderMode={`canvas`}
         >
+
         {
           Array.from(
             new Array(numPages),(el, index) => (
-              <Page key={`page_${index + 1}`}
-                  pageNumber={index + 1}/>),)
+              <Page
+              key={`page_${index + 1}`}
+              pageNumber={index + 1}
+              scale ={2}
+              />),)
         }
         </Document>
+        </div>
       </React.Fragment>
     )
   }

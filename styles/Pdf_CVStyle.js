@@ -1,7 +1,7 @@
 const styles = theme => ({
-  card: {
-    minWidth: 275,
-    marginTop: 20,
-  },
+  document:{
+    display: 'flex',
+    justifyContent: 'center'
+  }
 });
 export default styles;

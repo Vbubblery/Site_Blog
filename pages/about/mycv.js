@@ -22,7 +22,9 @@ class Mycv extends React.Component{
   render(){
     return(
       <React.Fragment>
+        <Layout>
           <Pdf_CV />
+        </Layout>
       </React.Fragment>
     )
   }

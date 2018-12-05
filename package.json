@@ -50,7 +50,6 @@
     "react-jss": "^8.6.1",
     "react-markdown": "^4.0.3",
     "react-pdf": "^4.0.0",
-    "react-pdf-js": "^4.0.2",
     "react-syntax-highlighter": "^8.0.1",
     "react-transition-group": "^2.4.0",
     "sass-loader": "^7.0.3",

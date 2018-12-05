@@ -7073,13 +7073,6 @@ react-modal@^3.1.7:
     react-lifecycles-compat "^3.0.0"
     warning "^3.0.0"
 
-react-pdf-js@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/react-pdf-js/-/react-pdf-js-4.0.2.tgz#57cb9294fbdb72eb64c9c2eabd73c53d91b397ca"
-  integrity sha512-6IWHYatHSMfmTc/kwfr7KTNUU+Z/oyztgxoSXQIo4ZBmDhprTRtM+uXEpPEuR+qLFF/StssHN+Oo7vFVdkQIFg==
-  dependencies:
-    pdfjs-dist "2.0.943"
-
 react-pdf@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/react-pdf/-/react-pdf-4.0.0.tgz#bbb788b5e0bc7e3ae32c2563f91ed9eebedb273e"
