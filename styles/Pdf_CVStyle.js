@@ -1,7 +1,20 @@
 const styles = theme => ({
-  document:{
+  card:{
+    minWidth: 600,
+    marginTop: 20,
+    'z-index': 1028,
+  },
+  cardContent:{
     display: 'flex',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
+  button:{
+    position: 'sticky',
+    top: 150,
+    'z-index': 1029,
+  },
+  rightIcon: {
+    marginLeft: theme.spacing.unit,
+  },
 });
 export default styles;
