@@ -40,7 +40,7 @@ class Post extends React.Component{
     return(
       <Layout>
         <Card className={this.classes.card}>
-          <CardContent>
+          <CardContent className={this.classes.wordWrap}>
             <Markdown escapeHtml={false} >{`${this.state.md}`}</Markdown>
           </CardContent>
         </Card>
