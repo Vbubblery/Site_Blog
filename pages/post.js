@@ -42,6 +42,12 @@ class Post extends React.Component{
         <Card className={this.classes.card}>
           <CardContent className={this.classes.wordWrap}>
             <Markdown escapeHtml={false} >{`${this.state.md}`}</Markdown>
+            <style>
+              {`pre {
+                white-space:pre-wrap;
+                word-wrap: break-word;
+              }`}
+            </style>
           </CardContent>
         </Card>
       </Layout>

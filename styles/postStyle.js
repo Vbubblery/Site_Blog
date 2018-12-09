@@ -4,7 +4,8 @@ const styles = theme => ({
     marginTop: 20,
   },
   wordWrap:{
-    wordWrap: 'break-word',
+    whiteSpace: 'pre-wrap',
+    wordWrap: 'break-word'
   }
 });
 export default styles;
